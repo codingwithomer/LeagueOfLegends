@@ -34,6 +34,7 @@ namespace LeagueOfLegends.Business.Concretes
 
         public void ShowResult(CharacterBase character)
         {
+            Console.WriteLine($"Tip: {character.GetType().Name}");
             Console.WriteLine($"İsim: {character.Name}");
             Console.WriteLine($"Sağlık Değeri: {character.HealthPoint.ToString()} HP");
             Console.WriteLine($"Atak Gücü: {character.AttackPower.ToString()} XP");
