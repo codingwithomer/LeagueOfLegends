@@ -26,13 +26,5 @@ namespace LeagueOfLegends.Character.Factory
 
             return character;
         }
-
-        public bool CharacterIsNull(CharacterBase character)
-        {
-            if (character == null)
-                return false;
-
-            return true;
-        }
     }
 }
