@@ -1,3 +1,5 @@
+## League Of Legends
+
 Bir bilgisayar oyunu programlıyoruz. 
 Oyunumuzda 3 tip karakter bulunuyor: "Savaşçı", "Sihirbaz" ve "Destek". 
 Karakterlerimizin isim, sağlık değeri ve atak gücü şeklinde 3 özelliği bulunuyor. 
