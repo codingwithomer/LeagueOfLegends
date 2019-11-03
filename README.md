@@ -29,19 +29,25 @@ Oyuncunun seçmiş olduğu karakterler sonucu aşağıdaki çıktı ekrana yazı
 
 NOT: Nesne yönelimli programlamanın, bu senaryoya uygun özelliklerinin kullanılması önerilmektedir.
 
-===============================================================
+---
+
 Tip: Savaşçı
 İsim: Ashe
 Sağlık Değeri: 105 HP
 Atak Gücü: 80 XP
-----------------
+
+---
+
 Tip: Sihirbaz
 İsim: Annie
 Sağlık Değeri: 150 HP
 Atak Gücü: 20 XP
-----------------
+
+---
+
 Tip: Destek
 İsim: Alistar
 Sağlık Değeri: 100 HP
 Atak Gücü: 50 XP
-----------------
+
+---
