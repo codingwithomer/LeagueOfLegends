@@ -1,27 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LeagueOfLegends.Character.Models
 {
     public abstract class CharacterBase
     {
-        private string _name;
         private int _healthPoint;
         private int _attackPower;
-        private CharacterType _characterType;
 
-        public CharacterBase(CharacterType characterType, string name, int healthPoint, int attackPower)
+        public CharacterBase(CharacterType characterType,
+                             string name,
+                             int healthPoint,
+                             int attackPower)
         {
-            _characterType = characterType;
-            _name = name;
+            CharacterType = characterType;
+            Name = name;
             _healthPoint = healthPoint;
             _attackPower = attackPower;
         }
 
-        public string Name { get { return _name; } set { _name = value; } }
+        public CharacterType CharacterType { get; }
+
+        public string Name { get; set; }
 
         public int HealthPoint
         {
@@ -52,5 +51,6 @@ namespace LeagueOfLegends.Character.Models
                 _attackPower = value;
             }
         }
+
     }
 }
