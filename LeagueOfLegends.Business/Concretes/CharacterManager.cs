@@ -1,20 +1,32 @@
 ﻿using LeagueOfLegends.Business.Abracts;
 using LeagueOfLegends.Character.Models;
-using LeagueOfLegends.Common.Enums;
+using LeagueOfLegends.Common;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace LeagueOfLegends.Business.Concretes
 {
     public class CharacterManager : ICharacterService
     {
+        private Dictionary<string,string> menuItems = new Dictionary<string, string>()
+        {
+            {"1",MenuConstants.Warrior},
+            {"2",MenuConstants.Wizard},
+            {"3",MenuConstants.Support},
+            {"4",MenuConstants.Exit}
+        };
+
         public void DisplayCharacterMenu()
         {
-            Console.WriteLine("Lütfen bir karakter seçiniz. Karakter seçimini yanlarında belirtilen sayılar ile yapınız ve ardından Entera basınız. ");
-            Console.WriteLine($"{(int)MenuItem.Warrior} - {MenuItem.Warrior}");
-            Console.WriteLine($"{(int)MenuItem.Wizard} - {MenuItem.Wizard}");
-            Console.WriteLine($"{(int)MenuItem.Support} - {MenuItem.Support}");
-            Console.WriteLine($"{(int)MenuItem.Exit} - {MenuItem.Exit}");
+            Console.WriteLine("Lütfen bir karakter seçiniz. Karakter seçimini yanlarında belirtilen sayılar ile yapınız ve ardından Enter'a basınız. ");
+
+            foreach (var menuItem in menuItems)
+            {
+                 Console.WriteLine($"{menuItem.Key} - {menuItem.Value}");
+            }            
+
             Console.WriteLine();
         }
 
@@ -34,17 +46,15 @@ namespace LeagueOfLegends.Business.Concretes
 
         public void ShowResult(CharacterBase character)
         {
-            Console.WriteLine($"Tip: {character.GetType().Name}");
-            Console.WriteLine($"İsim: {character.Name}");
-            Console.WriteLine($"Sağlık Değeri: {character.HealthPoint.ToString()} HP");
-            Console.WriteLine($"Atak Gücü: {character.AttackPower.ToString()} XP");
+            Console.WriteLine(character.ToString());
 
             Console.ReadLine();
         }
 
         public void ShowSelection(string input)
         {
-            Console.Write($"Seçiminiz : {input}");
+            string selection = menuItems.Where(x => x.Key == input).Select(y => y.Value).SingleOrDefault();
+            Console.Write($"Seçiminiz : {selection}");
             Thread.Sleep(1750);
         }
     }

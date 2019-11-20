@@ -47,19 +47,21 @@ namespace LeagueOfLegends.Business
 
                 string input = _characterService.GetCharacterInput();
 
-                _characterService.ShowSelection(input);
-                
                 isCharacterValid = characterValidator.IsInputValid(input, ref characterType);
-
-                Console.Clear();
 
                 if (isCharacterValid == false)
                 {
                     _characterService.ShowInvalidSelectionMessage();
+
                     continue;
                 }
-                else
+                else{
+                    _characterService.ShowSelection(input);
+
+                    Console.Clear();
+                    
                     break;
+                }
             }
 
             CharacterBase character = _characterFactory.CreateCharacter(characterType);

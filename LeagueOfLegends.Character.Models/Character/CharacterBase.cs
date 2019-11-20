@@ -6,6 +6,8 @@ namespace LeagueOfLegends.Character.Models
     {
         private int _healthPoint;
         private int _attackPower;
+        private string _type;
+    
 
         public CharacterBase(CharacterType characterType,
                              string name,
@@ -52,5 +54,43 @@ namespace LeagueOfLegends.Character.Models
             }
         }
 
+        public string Type 
+        { 
+            get
+            {
+                return _type;
+            }
+            private set{;}
+        }
+
+        public override string ToString()
+        {
+            return string.Concat($"Tip: {GetTypeName(CharacterType)}\n",
+                                 $"İsim: {Name}\n",
+                                 $"Sağlık Değeri: {HealthPoint.ToString()} HP\n",
+                                 $"Atak Gücü: {AttackPower.ToString()} XP");//$"İsim: {Name}\nSağlık Değeri: {HealthPoint.ToString()} HP";
+        }
+
+        private string GetTypeName(CharacterType characterType)
+        {
+            string name = string.Empty;
+
+            switch (characterType)
+            {
+                case CharacterType.Warrior:
+                    name ="Savaşçı";
+                    break;
+                case CharacterType.Wizard:
+                    name = "Sihirbaz";
+                    break;
+                case CharacterType.Support:
+                    name = "Destek";
+                    break;
+                default:
+                    throw new NotSupportedException();
+            }
+
+            return name;
+        }
     }
 }

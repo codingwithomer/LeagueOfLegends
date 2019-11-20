@@ -11,8 +11,8 @@ namespace LeagueOfLegends.Business.Concretes
             Console.WriteLine("Lütfen bir sağlık ekipman seçiniz. Ekipman seçimini belirtilen sayı ile yapınız ve ardından Entera basınız. ");
             Console.WriteLine("1-Mavi Büyü");
             Console.WriteLine("2-Yeşil Büyü");
-            Thread.Sleep(7000);
-            Console.Clear();
+
+            Console.WriteLine();
         }
 
         public string GetHealthEquipmentInput()
