@@ -1,18 +1,21 @@
-﻿using System;
-
 namespace LeagueOfLegends.Character.Models
 {
+    /// <summary>
+    /// Base entity that defines common character attributes and invariants.
+    /// </summary>
     public abstract class CharacterBase
     {
         private int _healthPoint;
         private int _attackPower;
-        private string _type;
-    
 
-        public CharacterBase(CharacterType characterType,
-                             string name,
-                             int healthPoint,
-                             int attackPower)
+        /// <summary>
+        /// Initializes a character with baseline attributes.
+        /// </summary>
+        /// <param name="characterType">Character category.</param>
+        /// <param name="name">Display name.</param>
+        /// <param name="healthPoint">Initial health value.</param>
+        /// <param name="attackPower">Initial attack value.</param>
+        protected CharacterBase(CharacterType characterType, string name, int healthPoint, int attackPower)
         {
             CharacterType = characterType;
             Name = name;
@@ -20,77 +23,48 @@ namespace LeagueOfLegends.Character.Models
             _attackPower = attackPower;
         }
 
+        /// <summary>
+        /// Gets character category.
+        /// </summary>
         public CharacterType CharacterType { get; }
 
-        public string Name { get; set; }
+        /// <summary>
+        /// Gets character display name.
+        /// </summary>
+        public string Name { get; }
 
+        /// <summary>
+        /// Gets or sets health value. Value cannot be negative.
+        /// </summary>
         public int HealthPoint
         {
-            get
-            {
-                return _healthPoint;
-            }
+            get => _healthPoint;
             set
             {
                 if (value < 0)
-                    throw new InvalidOperationException("Sağlık değeri 0'dan küçük olamaz.");
+                {
+                    throw new InvalidOperationException("Health value cannot be less than 0.");
+                }
 
                 _healthPoint = value;
             }
         }
 
+        /// <summary>
+        /// Gets or sets attack power value. Value cannot be negative.
+        /// </summary>
         public int AttackPower
         {
-            get
-            {
-                return _attackPower;
-            }
+            get => _attackPower;
             set
             {
                 if (value < 0)
-                    throw new InvalidOperationException("Atak değeri 0'dan küçük olamaz.");
+                {
+                    throw new InvalidOperationException("Attack value cannot be less than 0.");
+                }
 
                 _attackPower = value;
             }
-        }
-
-        public string Type 
-        { 
-            get
-            {
-                return _type;
-            }
-            private set{;}
-        }
-
-        public override string ToString()
-        {
-            return string.Concat($"Tip: {GetTypeName(CharacterType)}\n",
-                                 $"İsim: {Name}\n",
-                                 $"Sağlık Değeri: {HealthPoint.ToString()} HP\n",
-                                 $"Atak Gücü: {AttackPower.ToString()} XP");//$"İsim: {Name}\nSağlık Değeri: {HealthPoint.ToString()} HP";
-        }
-
-        private string GetTypeName(CharacterType characterType)
-        {
-            string name = string.Empty;
-
-            switch (characterType)
-            {
-                case CharacterType.Warrior:
-                    name ="Savaşçı";
-                    break;
-                case CharacterType.Wizard:
-                    name = "Sihirbaz";
-                    break;
-                case CharacterType.Support:
-                    name = "Destek";
-                    break;
-                default:
-                    throw new NotSupportedException();
-            }
-
-            return name;
         }
     }
 }

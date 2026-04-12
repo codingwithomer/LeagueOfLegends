@@ -1,30 +1,27 @@
-﻿using LeagueOfLegends.Character.Models;
+using LeagueOfLegends.Business.Abstractions;
+using LeagueOfLegends.Character.Models;
 
 namespace LeagueOfLegends.Character.Factory
 {
+    /// <summary>
+    /// Creates concrete character instances from character type values.
+    /// </summary>
     public class CharacterFactory : ICharacterFactory
     {
-
-        public CharacterBase CreateCharacter(int characterType)
+        /// <summary>
+        /// Returns a concrete character implementation for the given type.
+        /// </summary>
+        /// <param name="characterType">Character type selected by user.</param>
+        /// <returns>Initialized character instance.</returns>
+        public CharacterBase CreateCharacter(CharacterType characterType)
         {
-            CharacterBase character = null;
-
-            switch (characterType)
+            return characterType switch
             {
-                case 1:
-                    character = new Warrior();
-                    break;
-                case 2:
-                    character = new Wizard();
-                    break;
-                case 3:
-                    character = new Support();
-                    break;
-                default:
-                    break;
-            }
-
-            return character;
+                CharacterType.Warrior => new Warrior(),
+                CharacterType.Wizard => new Wizard(),
+                CharacterType.Support => new Support(),
+                _ => throw new NotSupportedException($"Unsupported character type: {characterType}")
+            };
         }
     }
 }

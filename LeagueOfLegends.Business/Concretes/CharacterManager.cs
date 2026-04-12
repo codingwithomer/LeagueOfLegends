@@ -1,61 +1,96 @@
-﻿using LeagueOfLegends.Business.Abracts;
+using LeagueOfLegends.Business.Abstractions;
 using LeagueOfLegends.Character.Models;
-using LeagueOfLegends.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 
 namespace LeagueOfLegends.Business.Concretes
 {
-    public class CharacterManager : ICharacterService
+    /// <summary>
+    /// Manages character menu interactions and result presentation.
+    /// </summary>
+    public class CharacterManager : ICharacterSelectionService, ICharacterResultService
     {
-        private Dictionary<string,string> menuItems = new Dictionary<string, string>()
+        private static readonly IReadOnlyDictionary<string, string> MenuItems = new Dictionary<string, string>
         {
-            {"1",MenuConstants.Warrior},
-            {"2",MenuConstants.Wizard},
-            {"3",MenuConstants.Support},
-            {"4",MenuConstants.Exit}
+            { "1", "Warrior" },
+            { "2", "Wizard" },
+            { "3", "Support" },
+            { "4", "Exit" }
         };
 
+        private readonly IGameConsole _console;
+        private readonly ICharacterFormatter _characterFormatter;
+
+        /// <summary>
+        /// Initializes character interaction dependencies.
+        /// </summary>
+        /// <param name="console">Console abstraction for input/output.</param>
+        /// <param name="characterFormatter">Formatter for result output.</param>
+        public CharacterManager(IGameConsole console, ICharacterFormatter characterFormatter)
+        {
+            _console = console;
+            _characterFormatter = characterFormatter;
+        }
+
+        /// <summary>
+        /// Prints available character choices.
+        /// </summary>
         public void DisplayCharacterMenu()
         {
-            Console.WriteLine("Lütfen bir karakter seçiniz. Karakter seçimini yanlarında belirtilen sayılar ile yapınız ve ardından Enter'a basınız. ");
+            _console.WriteLine("Please select a character. Enter the number shown next to the character and press Enter.");
 
-            foreach (var menuItem in menuItems)
+            foreach (KeyValuePair<string, string> menuItem in MenuItems)
             {
-                 Console.WriteLine($"{menuItem.Key} - {menuItem.Value}");
-            }            
+                _console.WriteLine($"{menuItem.Key} - {menuItem.Value}");
+            }
 
-            Console.WriteLine();
+            _console.WriteLine();
         }
 
+        /// <summary>
+        /// Reads and returns selected character input.
+        /// </summary>
+        /// <returns>User input value or empty string.</returns>
         public string GetCharacterInput()
         {
-            string input = Console.ReadLine();
-            Console.Clear();
-            return input;
+            string? input = _console.ReadLine();
+            return input ?? string.Empty;
         }
 
+        /// <summary>
+        /// Shows a standard invalid selection message.
+        /// </summary>
         public void ShowInvalidSelectionMessage()
         {
-            Console.WriteLine("Geçersiz seçim! Lütfen listedeki öğelerden birinin sayısal değerini giriniz..");
-            Thread.Sleep(2500);
-            Console.Clear();
+            _console.WriteLine("Invalid selection. Please enter one of the numeric values from the list.");
         }
 
-        public void ShowResult(CharacterBase character)
-        {
-            Console.WriteLine(character.ToString());
-
-            Console.ReadLine();
-        }
-
+        /// <summary>
+        /// Displays the chosen menu item text.
+        /// </summary>
+        /// <param name="input">Validated user selection key.</param>
         public void ShowSelection(string input)
         {
-            string selection = menuItems.Where(x => x.Key == input).Select(y => y.Value).SingleOrDefault();
-            Console.Write($"Seçiminiz : {selection}");
-            Thread.Sleep(1750);
+            if (MenuItems.TryGetValue(input, out string? selection))
+            {
+                _console.WriteLine($"Your selection: {selection}");
+                return;
+            }
+
+            _console.WriteLine("Your selection could not be resolved.");
+        }
+
+        /// <summary>
+        /// Writes the final formatted character result to output.
+        /// </summary>
+        /// <param name="character">Character to display.</param>
+        public void ShowResult(CharacterBase character)
+        {
+            string formattedCharacter = _characterFormatter.Format(character);
+
+            _console.WriteLine("---");
+            _console.WriteLine();
+            _console.WriteLine(formattedCharacter);
+            _console.WriteLine();
+            _console.WriteLine("---");
         }
     }
 }
