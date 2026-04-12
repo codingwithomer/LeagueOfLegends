@@ -1,64 +1,77 @@
 ## League Of Legends
 
-Bir bilgisayar oyunu programlıyoruz. 
-Oyunumuzda 3 tip karakter bulunuyor: "Savaşçı", "Sihirbaz" ve "Destek". 
-Karakterlerimizin isim, sağlık değeri ve atak gücü şeklinde 3 özelliği bulunuyor. 
-Bu özelliklere istenilen değerde başlangıç değeri atanması gerekmektedir.
+We are building a computer game.
+In this game, there are 3 character types: "Warrior", "Wizard", and "Support".
+Each character has 3 attributes: name, health value, and attack power.
+These attributes must be initialized with the required starting values.
 
-Oyuncu, karakter seçimi esnasında ekipman seçimi yapmak zorundadır. Buna göre;
+During character selection, the player must also select equipment. According to the rules:
 
-- Savaşçının mutlaka bir atak ve bir sağlık ekipmanı olmalıdır.
-- Sihirbazın mutlaka bir sağlık ekipmanı olmalıdır.
-- Destekçinin mutlaka bir atak ekipmanı olmalıdır.
+- A Warrior must have one attack equipment and one health equipment.
+- A Wizard must have one health equipment.
+- A Support must have one attack equipment.
 
-Ekipmanların katkıları aşağıdaki gibidir:
+Equipment effects are as follows:
 
-- Savaşçı tipindeki oyunculara;
-  - Mavi Büyü +10 HP
-  - Yeşil Büyü +5 HP
-  - Kılıç + 20 XP
-  - Silah + 50 XP
+- For Warrior characters:
+  - Blue Spell +10 HP
+  - Green Spell +5 HP
+  - Sword +20 XP
+  - Weapon +50 XP
 
-- Sihirbaz tipindeki oyunculara
-  - Mavi Büyü +50 HP
-  - Yeşil Büyü +30 HP
+- For Wizard characters:
+  - Blue Spell +50 HP
+  - Green Spell +30 HP
 
-- Destek tipindeki oyunculara;
-  - Kılıç +10 XP
-  - Silah +20 XP
+- For Support characters:
+  - Sword +10 XP
+  - Weapon +20 XP
 
-Oyuncunun seçmiş olduğu karakterler sonucu aşağıdaki çıktı ekrana yazılıyor. Bu ekran çıktısını sağlayan uygulamayı geliştiriniz.
+Based on the selected character and equipment, the following output is printed on the screen.
+Develop the application that produces this output.
 
-NOT: Nesne yönelimli programlamanın, bu senaryoya uygun özelliklerinin kullanılması önerilmektedir.
-
----
-
-Tip: Savaşçı
-
-İsim: Ashe
-
-Sağlık Değeri: 105 HP
-
-Atak Gücü: 80 XP
+NOTE: It is recommended to use object-oriented programming principles suitable for this scenario.
 
 ---
 
-Tip: Sihirbaz
+## Development Notes (macOS)
 
-İsim: Annie
+This repository is configured to keep NuGet packages locally under `./.nuget/packages`.
+This prevents `dotnet restore/build/test` commands from getting blocked due to permission issues in `~/.local/share/NuGet`.
 
-Sağlık Değeri: 150 HP
+If NuGet cache permissions are broken on your machine, run these commands once:
 
-Atak Gücü: 20 XP
+```bash
+mkdir -p ~/.local/share/NuGet
+chmod -R u+rwX ~/.local/share/NuGet
+```
+
+Type: Warrior
+
+Name: Ashe
+
+Health Value: 105 HP
+
+Attack Power: 80 XP
 
 ---
 
-Tip: Destek
+Type: Wizard
 
-İsim: Alistar
+Name: Annie
 
-Sağlık Değeri: 100 HP
+Health Value: 150 HP
 
-Atak Gücü: 50 XP
+Attack Power: 20 XP
+
+---
+
+Type: Support
+
+Name: Alistar
+
+Health Value: 100 HP
+
+Attack Power: 50 XP
 
 ---

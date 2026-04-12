@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <!-- Keep NuGet artifacts inside repo to avoid machine-level permission issues. -->
+    <RestorePackagesPath>$(MSBuildThisFileDirectory).nuget/packages</RestorePackagesPath>
+    <!-- Prevent writes to user-level NuGet HTTP cache. -->
+    <RestoreNoHttpCache>true</RestoreNoHttpCache>
+    <!-- Disable vulnerability audit network/cache side effects during local dev/test. -->
+    <NuGetAudit>false</NuGetAudit>
+  </PropertyGroup>
+</Project>

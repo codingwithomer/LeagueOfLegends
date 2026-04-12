@@ -1,3 +1,14 @@
 {
-    "dotnet.preferCSharpExtension": true
+    "dotnet.preferCSharpExtension": true,
+    "files.exclude": {
+        "**/.DS_Store": true,
+        "**/.idea": true,
+        "**/.vs": true,
+        "**/bin": true,
+        "**/obj": true
+    },
+    "search.exclude": {
+        "**/bin": true,
+        "**/obj": true
+    }
 }
